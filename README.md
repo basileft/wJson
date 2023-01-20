@@ -1,2 +1,2 @@
-# Json-Parser-Encoder
+# wJson
 Json parser and encoder -> C library 
