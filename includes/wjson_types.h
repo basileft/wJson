@@ -14,9 +14,10 @@
         struct list_element *_next_element;
         union {
             char *value;
-            struct list *depend_list;
-            struct dictionary *depend_dictionary;
+            int int_value;
         } data;
+        struct list *depend_list;
+        struct dictionary *depend_dictionary;
     };
 
     struct dictionary_element {
@@ -24,9 +25,10 @@
         char *key;
         union {
             char *value;
-            struct list *depend_list;
-            struct dictionary *depedn_dictionary;
+            int int_value;
         } data;
+        struct list *depend_list;
+        struct dictionary *depend_dictionary;
     };
 
     struct list_methods {
@@ -54,6 +56,11 @@
         struct dictionary_methods methods;
     };
 
+    struct buffer {
+        char _c;
+        struct buffer *_next_element;
+    };
+
     typedef struct list_element wlist_element_t;
     typedef struct list_element wle_t;
     typedef struct dictionary_element wdictionary_element_t;
@@ -62,6 +69,7 @@
     typedef struct list wl_t;
     typedef struct dictionary wjson_dictionary_t;
     typedef struct dictionary wd_t;
+    typedef struct buffer wjson_buffer_t;
     // typedef void *wjson_t;
     typedef int wbool;
 

@@ -5,31 +5,32 @@
 ** wjson_macros
 */
 
-#ifndef WJSON_MACROS_H_
-    #define WJSON_MACROS_H_
+#pragma once
 
-    #include "wjson_types.h"
+#include "wjson_types.h"
+#include "wjson.h"
 
-    /* [STATIC INDEX MANAGEMENT]*/
-    int index_static(int _manage_var, char *buffer);
-    void skip_index(char *_buffer, char c);
-    #define ADVANCE_ONE_CHAR ((int)1)
-    #define ADVANCE_ALL ((int)0)
-    #define ADD(__buff__) (index_static(ADVANCE_ONE_CHAR, __buff__))
-    #define SKIP(__buff__) (index_static(ADVANCE_ALL, __buff__))
-    #define ADD_SKIP(__buff__) (ADD(__buff__), SKIP(__buff__))
-    #define GET ((int)-1)
-    #define INDEX (index_static(GET, ""))
-    #define SKIP_TO(__buff__, _C) (skip_index(__buff__, _C))
-    /*  ________________________ */
+/* STREAM MANAGEMENT */
+int wjson_stream_index(wbool ADD);
+void wjson_skip(char * _wjson_buffer, char *_PATTERN);
+void wjson_skip_white_space(char *_wjson_buffer);
+#define GET wjson_stream_index(WTRUE)
+#define GET_TMP wjson_stream_index(WFALSE)
+#define _STREAM(__buff__) (__buff__[GET])
+#define _SKIP(__buff__, _PATTERN) (wjson_skip(__buff__, _PATTERN))
+#define _SKIPWS(__buff__) (wjson_skip_white_space(__buff__))
+/*  ________________________ */
 
 
-    wbool is_digit(char _c);
-    #define WTRUE ((wbool)1)
-    #define WFALSE ((wbool)0)
-    #define DIGIT(_C) (is_digit(_C))
-    #define STRING(_C) (_C == '"' ? WTRUE : WFALSE)
+wjson_buffer_t *wjson_buffer_add_char(wjson_buffer_t *_previous, char _c);
+#define WBUFFER_ADD(_self, _char) _self = wjson_buffer_add_char(_self, _char);
 
-    #define NONE ((int)-1)
+wbool is_digit(char _c);
+#define WTRUE ((wbool)1)
+#define WFALSE ((wbool)0)
+#define DIGIT(_C) (is_digit(_C))
+#define STRING(_C) (_C == '"' ? WTRUE : WFALSE)
 
-#endif /* !WJSON_MACROS_H_ */
+#define NONE ((int)-1)
+#define WBEGIN_ELEMENT "{["
+

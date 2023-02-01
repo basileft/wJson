@@ -13,17 +13,20 @@ NAME = wjson.a
 
 vpath %.c sources/wjson_pars
 vpath %.c sources/tools
-vpath %.c sources/manage_lls
+vpath %.c sources/tools/stream
+vpath %.c sources/tools/manage_lls
+vpath %.c sources/tools/buffers
 
 SRC = wjson_pars_main.c \
 		wjson_get_dictionary.c \
 		wjson_get_list.c \
 		get_file_content.c \
-		index_static.c \
 		list.c \
 		dictionary.c \
 		str_tools.c \
 		get_elements.c \
+		index.c \
+		manage_buffers.c \
 
 OBJ = $(patsubst %.c, $(OBJECTS)/%.o, $(SRC))
 

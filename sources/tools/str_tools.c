@@ -41,7 +41,5 @@ char *wstrconcat(char *_original, char *_to_add)
         _ret[_index] = _original[i];
     for (int i = 0; _to_add[i]; _index++, i++)
         _ret[_index] = _to_add[i];
-    free(_original);
-    free(_to_add);
     return _ret;
 }

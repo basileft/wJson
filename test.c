@@ -6,8 +6,11 @@
 */
 
 #include "wjson.h"
+#include <stdio.h>
+
+#define A(_C, _A) _C = _A
 
 int main(int ac, char **av)
 {
-    void *name = wjson_parse(av[1]);
+    wjson_parse(av[1]);
 }

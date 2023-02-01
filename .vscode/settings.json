@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "*.py": "python",
+        "wjson.h": "c",
+        "cstdlib": "c",
+        "locale": "c",
+        "ostream": "c",
+        "new": "c",
+        "memory": "c"
+    }
+}

@@ -8,19 +8,23 @@
 #include "wjson.h"
 #include <stdio.h>
 
+char *wjson_get_key(char *_wjson_buffer)
+{
+    wjson_buffer_t *buffer = wjson_buffer_create();
+    WBUFFER_ADD(buffer, 'c');
+    WBUFFER_ADD(buffer, 'v');
+    printf("%s\n", wjson_get_buffer(buffer));
+
+    return " ";
+}
+
 wjson_dictionary_t *wjson_get_dictionary(char *_wjson_buffer)
 {
     wjson_dictionary_t *_ret = wjson_dictionary_create();
-    char *_temp_key = NULL;
+    char *_tmp_key;
 
-    do {
-        SKIP_TO(_wjson_buffer, '"');
-        _temp_key = wjson_get_string(_wjson_buffer);
-        SKIP_TO(_wjson_buffer, ':');
-        ADD_SKIP(_wjson_buffer);
-        if (DIGIT(_wjson_buffer[INDEX]) || _wjson_buffer[INDEX] == '"')
-            wjson_dictionary_add_node(_ret, _temp_key, wget_v(_wjson_buffer));
-    } while (_wjson_buffer[INDEX] == ',');
-    wjson_display_dictionary(_ret);
-    return NULL;
+    _SKIPWS(_wjson_buffer);
+    _tmp_key = wjson_get_key(_wjson_buffer);
+    // printf("%s\n", _tmp_key);
+    return _ret;
 }
